@@ -21,7 +21,7 @@ import {
     User,
     Trophy,
     Star,
-    BookMarked
+    BookMarked, LogOut
 } from 'lucide-react';
 import {
     Tooltip,
@@ -30,13 +30,22 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useUser } from "@/context/UserContext";
+import {useAuth} from "@/context/AuthContext.tsx";
+import {useNavigate} from "react-router-dom";
 
 export const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
+    const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const { user, isLoading } = useUser();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
 
     const { toast } = useToast();
 
@@ -128,6 +137,7 @@ export const ProfilePage = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="flex flex-col gap-1 mx-0">
                         <Button
                             variant="outline"
                             onClick={isEditing ? handleCancelEditing : handleStartEditing}
@@ -135,6 +145,15 @@ export const ProfilePage = () => {
                         >
                             {isEditing ? 'Отменить' : 'Редактировать профиль'}
                         </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={handleLogout}
+                                className="w-full flex items-center gap-2"
+                            >
+                                <LogOut className="h-4 w-4" />
+                                Выйти
+                            </Button>
+                        </div>
                     </div>
                 </CardHeader>
 
