@@ -25,7 +25,7 @@ export const useSpaces = () => {
             setSpaces(prev => [...prev, newSpace]);
             return newSpace;
         } catch (err) {
-            throw err;
+            setError(getErrorMessage(err));
         }
     };
 

@@ -28,7 +28,7 @@ export const useSpaceDetail = (spaceId: number) => {
             setChallenges(prev => [...prev, newChallenge]);
             return newChallenge;
         } catch (err) {
-            throw err;
+            setError(err instanceof Error ? err.message : 'Failed to create challenge');
         }
     };
 
