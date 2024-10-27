@@ -72,12 +72,10 @@ const ChallengeCard = ({ challenge, onClick }) => {
                             )}
                         </div>
                     </div>
-                    {challenge.current_progress === 100 && (
-                        <div className="flex flex-col items-end gap-1">
-                            <span className="text-sm font-medium">{challenge.current_progress}%</span>
-                            <Progress value={challenge.current_progress} className="w-20" />
-                        </div>
-                    )}
+                    <div className="flex flex-col items-end gap-1">
+                        <span className="text-sm font-medium">{challenge.current_progress}%</span>
+                        <Progress value={challenge.current_progress} className="w-20" />
+                    </div>
                 </div>
             </CardContent>
         </Card>
@@ -89,7 +87,7 @@ export const SpaceDetailPage = () => {
     const { spaceId } = useParams();
     const { spaces } = useSpaces();
     const { challenges, createChallenge } = useSpaceDetail(Number(spaceId));
-    const space = spaces.find(s => s.id === Number(spaceId));
+    const space  = spaces.find(s => s.id === Number(spaceId));
 
     const [isCreateChallengeOpen, setIsCreateChallengeOpen] = useState(false);
     const [createChallengeForm, setCreateChallengeForm] = useState<CreateChallengeDTO>({

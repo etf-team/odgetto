@@ -29,7 +29,7 @@ export const Dashboard = () => {
         completedChallenges: challenges.filter(c => c.state === 'FINISHED').length,
         userAchievements: userProfile?.achievements_assignations.length || 0,
         allAchievements: achievements,
-        points: challenges.reduce((sum, challenge) => sum + (challenge.current_progress || 0), 0)
+        points: 0
     };
 
     return (

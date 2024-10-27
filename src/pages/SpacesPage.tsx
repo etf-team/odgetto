@@ -160,7 +160,7 @@ export const SpacesPage = () => {
                                 <Button variant="outline" onClick={() => setIsCreateModalOpen(false)}>
                                     Отмена
                                 </Button>
-                                <Button onClick={handleCreateSpace}>Создать пространство</Button>
+                                <Button onClick={handleCreateSpace} className="text-black">Создать пространство</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>

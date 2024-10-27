@@ -29,17 +29,19 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useUser } from "@/context/UserContext";
 
 export const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
 
+    const { user, isLoading } = useUser();
+
     const { toast } = useToast();
 
-    // Исходные данные профиля
     const initialProfileData = {
-        fullName: 'Иван Иванов',
+        fullName: user?.full_name,
         email: 'ivan@oggetto.ru',
         phone: '+7 (999) 123-45-67',
         department: 'Разработка',
@@ -58,6 +60,10 @@ export const ProfilePage = () => {
 
     const [profileData, setProfileData] = useState(initialProfileData);
     const [editFormData, setEditFormData] = useState(initialProfileData);
+
+    if (isLoading) {
+        return <div className="flex justify-center items-center h-screen">Загрузка...</div>;
+    }
 
     const handleStartEditing = () => {
         setEditFormData(profileData); // Копируем текущие данные в форму
@@ -103,7 +109,7 @@ export const ProfilePage = () => {
                     <div className="flex flex-col sm:flex-row items-center gap-6">
                         <Avatar className="h-24 w-24">
                             <AvatarImage src="/placeholder-avatar.jpg" />
-                            <AvatarFallback className="text-2xl">ИИ</AvatarFallback>
+                            <AvatarFallback className="text-2xl">{user?.full_name.slice(0, 1)}</AvatarFallback>
                         </Avatar>
                         <div className="flex-1 text-center sm:text-left">
                             <CardTitle className="text-2xl mb-2">{profileData.fullName}</CardTitle>

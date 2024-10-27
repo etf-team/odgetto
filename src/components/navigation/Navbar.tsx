@@ -4,9 +4,12 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ChevronDown } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import { useUser } from "@/context/UserContext";
+import React from "react";
 
 export const Navbar = () => {
     const { isAuthenticated, logout } = useAuth();
+    const { user } = useUser();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -52,7 +55,7 @@ export const Navbar = () => {
                                 className="h-8 w-8 lg:h-10 lg:w-10 cursor-pointer transition-transform hover:scale-105"
                                 onClick={() => navigate('/profile')}
                             >
-                                <AvatarFallback>И</AvatarFallback>
+                                <AvatarFallback>{user?.full_name.slice(0, 1)}</AvatarFallback>
                             </Avatar>
                         )}
                     </div>
