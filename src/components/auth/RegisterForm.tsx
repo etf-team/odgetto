@@ -18,7 +18,6 @@ export const RegisterForm = () => {
         try {
             await registerUser(email, password, fullName);
 
-            // После успешной регистрации выполняем вход
             const token = await loginUser(email, password);
             if (token) {
                 toast({

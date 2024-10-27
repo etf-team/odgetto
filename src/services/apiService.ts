@@ -49,7 +49,6 @@ const getErrorMessage = (error: unknown): string => {
     return 'Ошибка сети. Проверьте подключение к интернету.';
 };
 
-// Authentication methods remain the same...
 export const registerUser = async (email: string, password: string, full_name: string) => {
     try {
         const response = await api.post('/register', { email, password, full_name });
@@ -75,7 +74,6 @@ export const loginUser = async (email: string, password: string) => {
     }
 };
 
-// User profile methods remain the same...
 export const getUserProfile = async (): Promise<UserDTO> => {
     try {
         const response = await api.get('/me');
@@ -85,7 +83,6 @@ export const getUserProfile = async (): Promise<UserDTO> => {
     }
 };
 
-// Spaces methods remain the same...
 export const getSpaces = async (): Promise<SpaceDTO[]> => {
     try {
         const response = await api.get('/spaces');
@@ -113,7 +110,6 @@ export const joinSpaceByToken = async (data: JoinSpaceDTO): Promise<SpaceDTO> =>
     }
 };
 
-// Achievements methods remain the same...
 export const getAchievements = async (spaceId: number | '*'): Promise<Achievement[]> => {
     try {
         const response = await api.get(`/spaces/${spaceId}/achievements`);
@@ -123,7 +119,6 @@ export const getAchievements = async (spaceId: number | '*'): Promise<Achievemen
     }
 };
 
-// Updated and new challenge methods
 export const getChallenges = async (
     spaceId: number | '*',
     state?: 'SCHEDULED' | 'ACTIVE' | 'FINISHED'
@@ -143,7 +138,6 @@ export const createChallenge = async (
     data: CreateChallengeDTO
 ): Promise<ChallengeDTO> => {
     try {
-        // Clean dates by removing 'Z' suffix if present
         const cleanData = {
             ...data,
             starts_at: data.starts_at.replace('Z', ''),
@@ -162,7 +156,6 @@ export const updateChallenge = async (
     data: Partial<CreateChallengeDTO>
 ): Promise<ChallengeFullDTO> => {
     try {
-        // Clean dates by removing 'Z' suffix if present
         const cleanData = {
             ...data,
             starts_at: data.starts_at?.replace('Z', ''),
