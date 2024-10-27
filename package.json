@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "setup:ui": "npx shadcn-ui@latest init && npx shadcn-ui@latest add alert alert-dialog avatar badge button calendar card checkbox dialog dropdown-menu input label popover progress select separator tabs textarea toast toaster tooltip"
+    "init:ui": "npx shadcn@latest init",
+    "setup:ui": "npx shadcn@latest add alert alert-dialog avatar badge button calendar card checkbox dialog dropdown-menu input label popover progress select separator tabs textarea toast use-toast tooltip"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.2",
