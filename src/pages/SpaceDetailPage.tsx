@@ -176,7 +176,7 @@ export const SpaceDetailPage = () => {
                         <p className="text-muted-foreground mt-1 text-left">{space.description}</p>
                     </div>
                     <Button variant="outline" onClick={handleCopyInvite}>
-                        <Copy className="h-4 w-4 mr-2" />
+                        <Copy className="h-4 w-4 mr-0 sm:mr-2" />
                         <p className="hidden md:block" >Код приглашения</p>
                     </Button>
                 </div>
@@ -228,8 +228,8 @@ export const SpaceDetailPage = () => {
                     <div className="flex justify-between items-center">
                         <h2 className="text-2xl font-bold">Челленджи</h2>
                         <Button className="text-black" onClick={() => setIsCreateChallengeOpen(true)}>
-                            <PlusCircle className="h-4 w-4 mr-2" />
-                            Создать челлендж
+                            <PlusCircle className="h-4 w-4 mr-0 sm:mr-2" />
+                            <p className="hidden sm:block">Создать челлендж</p>
                         </Button>
                     </div>
 

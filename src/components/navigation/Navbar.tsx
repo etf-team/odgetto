@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ChevronDown } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "@/context/UserContext";
+import logoUrl from '@/assets/oggetto.png?url';
 
 export const Navbar = () => {
     const { isAuthenticated, logout } = useAuth();
@@ -25,7 +26,7 @@ export const Navbar = () => {
                          style={{ cursor: 'pointer' }}
                     >
                         <img
-                            src="../src/assets/oggetto.png"
+                            src={logoUrl}
                             className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                             alt="logo"
                         />
