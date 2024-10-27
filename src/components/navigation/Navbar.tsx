@@ -5,7 +5,6 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ChevronDown } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "@/context/UserContext";
-import React from "react";
 
 export const Navbar = () => {
     const { isAuthenticated, logout } = useAuth();

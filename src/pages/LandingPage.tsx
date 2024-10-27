@@ -1,7 +1,7 @@
 // import { Navbar } from '@/components/navigation/Navbar';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { AuthCard } from '@/components/auth/AuthCard';
-import { Dashboard } from '@/components/dashboard/dashboard';
+import { Dashboard } from '@/components/dashboard/Dashboard';
 import { useAuth } from '@/context/AuthContext';
 import { UserProvider } from '@/context/UserContext';
 

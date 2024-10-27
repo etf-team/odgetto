@@ -69,11 +69,9 @@ export interface CreateChallengeDTO {
     ends_at_const: string;
     ends_at_determination_fn: 'HIGHER_THAN' | 'LESS_THAN' | 'HEAD' | 'TAIL';
     ends_at_determination_argument: number;
-    members: ChallengeMemberDTO[];
     results_aggregation_strategy: 'SUM' | 'AVG' | 'MAX' | 'MIN';
     prize_determination_fn: 'HIGHER_THAN' | 'LESS_THAN' | 'HEAD' | 'TAIL';
     prize_determination_argument: number;
-    active_results: ActiveResults
 }
 
 export interface ChallengeMemberDTO {
@@ -94,6 +92,7 @@ export interface ChallengeFullDTO extends ChallengeDTO {
     prize_determination_fn: 'HIGHER_THAN' | 'LESS_THAN' | 'HEAD' | 'TAIL';
     prize_determination_argument: number;
     members: ChallengeMemberDTO[];
+    active_results: ActiveResults[];
 }
 
 export interface ChallengeResultDTO {

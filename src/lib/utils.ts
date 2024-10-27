@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export const getErrorMessage = (error: unknown): string => {
+  if (error instanceof Error) return error.message;
+  return "Произошла неизвестная ошибка";
+};
+
 export const getStatusColor = {
   SCHEDULED: "bg-blue-50 text-blue-700 hover:bg-blue-200",
   ACTIVE: "bg-green-50 text-green-700 hover:bg-green-200",

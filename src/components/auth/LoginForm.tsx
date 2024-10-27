@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { loginUser } from "@/services/apiService";
+import {getErrorMessage} from "@/lib/utils.ts";
 
 export const LoginForm = () => {
     const { login } = useAuth();
@@ -25,7 +26,7 @@ export const LoginForm = () => {
             toast({
                 variant: "destructive",
                 title: "Ошибка входа",
-                description: err.message,
+                description: getErrorMessage(err),
                 duration: 3000,
             });
         }

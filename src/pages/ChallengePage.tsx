@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useChallenge } from '@/context/ChallengeContext.tsx';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import {
     Users, Target,
-    Calendar, Edit, ArrowLeft, Award
+    Calendar, Edit, ArrowLeft, Award, CheckCircle2
 } from 'lucide-react';
 import {Alert, AlertDescription} from "@/components/ui/alert.tsx";
 import {Badge} from "@/components/ui/badge.tsx";
@@ -56,7 +56,7 @@ export const ChallengePage = () => {
     const currentUserMember = challenge?.members.find(member => member.user.id === user?.id);
     const isAdmin = currentUserMember?.is_administrator;
     const isParticipant = currentUserMember?.is_participant;
-    const isReferee = currentUserMember?.is_referee;
+    // const isReferee = currentUserMember?.is_referee;
 
     const handleJoin = async () => {
         try {

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSpaces } from '@/context/SpacesContext';
 import { useSpaceDetail } from '@/context/SpaceDetailContext';
-import { PlusCircle, Trophy, Users, Target, CalendarDays, Copy } from 'lucide-react';
+import { PlusCircle, Trophy, Users, Target, CalendarDays, Copy, LucideIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { ChallengeDTO, CreateChallengeDTO } from "@/types/api.ts";
@@ -21,7 +21,18 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { getStatusColor, getStatusLabel } from "@/lib/utils";
 
-const StatCard = ({ icon: Icon, title, value }) => (
+interface StatCardProps {
+    icon: LucideIcon;
+    title: string;
+    value: string | number;
+}
+
+interface ChallengeCardProps {
+    challenge: ChallengeDTO;
+    onClick: () => void;
+}
+
+const StatCard = ({ icon: Icon, title, value }: StatCardProps) => (
     <Card className="flex items-center p-4 gap-4">
         <div className="bg-primary/10 p-2 rounded-full">
             <Icon className="h-5 w-5 text-primary" />
@@ -33,7 +44,7 @@ const StatCard = ({ icon: Icon, title, value }) => (
     </Card>
 );
 
-const ChallengeCard = ({ challenge, onClick }) => {
+const ChallengeCard = ({ challenge, onClick }: ChallengeCardProps) => {
     return (
         <Card
             className="hover:shadow-md transition-all cursor-pointer"
@@ -91,7 +102,6 @@ export const SpaceDetailPage = () => {
 
     const [isCreateChallengeOpen, setIsCreateChallengeOpen] = useState(false);
     const [createChallengeForm, setCreateChallengeForm] = useState<CreateChallengeDTO>({
-        active_results: undefined,
         name: '',
         description: '',
         prize: '',
