@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getSpaces, createSpace } from '@/services/apiService';
-import { SpaceDTO, CreateSpaceDTO } from '@/types/api';
+import {getSpaces, createSpace, joinSpaceByToken} from '@/services/apiService';
+import {SpaceDTO, CreateSpaceDTO, JoinSpaceDTO} from '@/types/api';
+import {getErrorMessage} from "@/lib/utils.ts";
 
 export const useSpaces = () => {
     const [spaces, setSpaces] = useState<SpaceDTO[]>([]);
@@ -34,6 +35,15 @@ export const useSpaces = () => {
         setSpaces(prev => prev.filter(space => space.id !== spaceId));
     };
 
+    const joinSpace = async (data: JoinSpaceDTO) => {
+        try {
+            const newSpace = await joinSpaceByToken(data);
+            setSpaces(prevSpaces => [...prevSpaces, newSpace]);
+        } catch (err) {
+            setError(getErrorMessage(err));
+        }
+    };
+
     useEffect(() => {
         fetchSpaces();
     }, []);
@@ -44,6 +54,6 @@ export const useSpaces = () => {
         error,
         createSpace: handleCreateSpace,
         deleteSpace: handleDeleteSpace,
-        refreshSpaces: fetchSpaces
+        joinSpace: joinSpace,
     };
 };

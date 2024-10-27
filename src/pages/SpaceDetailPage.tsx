@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSpaces } from '@/context/SpacesContext';
 import { useSpaceDetail } from '@/context/SpaceDetailContext';
-import { PlusCircle, Trophy, Users, Target, CalendarDays, Copy, LucideIcon } from 'lucide-react';
+import {PlusCircle, Trophy, Users, Target, CalendarDays, Copy, LucideIcon, CheckCircle2} from 'lucide-react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { ChallengeDTO, CreateChallengeDTO } from "@/types/api.ts";
@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { getStatusColor, getStatusLabel } from "@/lib/utils";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 
 interface StatCardProps {
     icon: LucideIcon;
@@ -99,6 +100,8 @@ export const SpaceDetailPage = () => {
     const { spaces } = useSpaces();
     const { challenges, createChallenge } = useSpaceDetail(Number(spaceId));
     const space  = spaces.find(s => s.id === Number(spaceId));
+    const [isCopied, setIsCopied] = useState(false);
+    const [tooltipOpen, setTooltipOpen] = useState(false);
 
     const [isCreateChallengeOpen, setIsCreateChallengeOpen] = useState(false);
     const [createChallengeForm, setCreateChallengeForm] = useState<CreateChallengeDTO>({
@@ -119,6 +122,10 @@ export const SpaceDetailPage = () => {
 
     const handleCopyInvite = () => {
         navigator.clipboard.writeText(space?.invitation_token || '');
+        setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 2000);
     };
 
     const handleCreateChallenge = async () => {
@@ -172,13 +179,26 @@ export const SpaceDetailPage = () => {
                 {/* Header */}
                 <div className="flex justify-between items-start">
                     <div>
-                        <h1 className="text-3xl font-bold">{space.name}</h1>
+                        <h1 className="text-3xl font-bold text-left">{space.name}</h1>
                         <p className="text-muted-foreground mt-1 text-left">{space.description}</p>
                     </div>
-                    <Button variant="outline" onClick={handleCopyInvite}>
-                        <Copy className="h-4 w-4 mr-0 sm:mr-2" />
-                        <p className="hidden md:block" >Код приглашения</p>
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
+                            <TooltipTrigger asChild>
+                                <Button variant="outline" onClick={handleCopyInvite}>
+                                    {isCopied ? (
+                                        <CheckCircle2 className="h-4 w-4 mr-0 sm:mr-2 text-green-500" />
+                                    ) : (
+                                        <Copy className="h-4 w-4 mr-0 sm:mr-2" />
+                                    )}
+                                    <p className="hidden md:block">Код приглашения</p>
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent className="bg-white text-black border-2">
+                                <p>{isCopied ? 'Скопировано!' : 'Копировать код приглашения'}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
 
                 {/* Stats Grid */}

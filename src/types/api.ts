@@ -106,3 +106,7 @@ export interface ChallengeResultDTO {
 export interface SubmitChallengeResultDTO {
     submitted_value: number;
 }
+
+export interface JoinSpaceDTO {
+    invitation_token: string;
+}
